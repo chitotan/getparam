@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<meta charset="utf-8">
+<head>
+    <title>getparam</title>
+</head>
+<body>
+    <script>
+        console.log('this is unchi-api. \nmade by chitoheymu_kakka')
+        // URLパラメータを取得する関数
+        function getUrlParams() {
+        var params = {};
+        var url = window.location.href;
+        var queryString = url.split("?")[1];
+        if (!queryString) {
+            return params;
+        }
+        var paramList = queryString.split("&");
+        for (var i = 0; i < paramList.length; i++) {
+            var param = paramList[i].split("=");
+            var paramName = param[0];
+            var paramValue = param[1];
+            params[paramName] = paramValue;
+        }
+        return params;
+        }
+
+        // パラメータの値を変数に代入する
+        var params = getUrlParams();
+        for (var paramName in params) {
+        var paramValue = params[paramName];
+        window[paramName] = paramValue;
+        }
+
+        // パラメータの値をconsole.logに出力する
+        for (var paramName in params) {
+        var paramValue = window[paramName];
+        console.log(paramValue);
+        }
+
+        // パラメータをリストとして出力する
+        var list = document.createElement("ul");
+        for (var paramName in params) {
+        var paramValue = window[paramName];
+        var item = document.createElement("li");
+        item.innerHTML = paramName + ": " + paramValue;
+        list.appendChild(item);
+        }
+        document.body.appendChild(list);
+    </script>
+</body>
+</html>
